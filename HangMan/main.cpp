@@ -26,8 +26,6 @@ void open_file(vector<string> &v) {
 string encode_word(string word) {
 	const int MAX_HiddenWord = 2; // Max number of char to be hidden
 
-	cout << word << endl;
-	
 	for (int i = 0; i < MAX_HiddenWord; i++) {
 		char hide = word[rand() % word.size()];
 
@@ -43,7 +41,6 @@ string encode_word(string word) {
 		}
 	}
 
-	cout << word << endl;
 	return word;
 }
 
@@ -53,10 +50,29 @@ void game(vector<string> &v) {
 	string problem;
 
 	problem = encode_word(word);
-	cout << problem << endl;
+	
+	for (int i = 0; i < 5; i++) {
+		bool find = false;
+		char input;
+		cout << problem << endl;
+		cin >> input;
+		
+		for (int j = 0; j < word.size(); j++) {
+			if (word[j] == input && problem[j] == '-') {
+				problem[j] = input;
+				find = true;
+			}
+		}
+		
+		if (find) i--; // if find one letter then give one more chance (total 5 failes will be defeat)
+		if (!word.compare(problem)) { // return 0 if two objects are the same.
+			cout << problem << endl;
+			return;
+		}
+	}
 
-	//cout << "word : " << word << endl;
-	//cout << "problem : " << problem << endl;
+	cout << "Failed to complete word in 5 chances." << endl;
+	cout << word << endl;
 }
 
 int main() {
@@ -69,10 +85,12 @@ int main() {
 	cout << "|    Let's start the Hangman game !    |" << endl;
 	cout << "----------------------------------------" << endl;
 
-	game(voca);
-
-	//for (int i = 0; i < voca.size(); i++)
-	//	cout << voca[i] << ' ' << i << endl;
+	char retry;
+	do {
+		game(voca);
+		cout << "Next(y/n)?" << endl;
+		cin >> retry;
+	} while (retry == 'y');
 
 	return 0;
 }
