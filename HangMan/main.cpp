@@ -14,7 +14,7 @@ int main() {
 		exit(0);
 	}
 
-	GameDirector director;
+	GameDirector director; // manage all game members
 
 	director.append_word(inFile);
 

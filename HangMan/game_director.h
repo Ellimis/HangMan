@@ -7,9 +7,10 @@ using namespace std;
 
 class GameDirector {
 	vector<string> vocabulary; // word vocabulary
+
 public:
 	GameDirector();
-	void append_word(ifstream &fin);
+	void append_word(ifstream& fin);
 	string encode_word(string word);
 	void game();
 };
@@ -21,7 +22,7 @@ GameDirector::GameDirector() {
 }
 
 // 193 words
-void GameDirector::append_word(ifstream &fin) { // word append from txt file to vector
+void GameDirector::append_word(ifstream& fin) { // word append from txt file to vector
 	string word;
 
 	while (getline(fin, word))
@@ -63,8 +64,9 @@ void GameDirector::game() {
 		cout << problem << endl;
 		cin >> input;
 
+		// Add if the current encrypted character is the same as '-' and the user-entered character is the same as the real character
 		for (int j = 0; j < word.size(); j++) {
-			if (word[j] == input && problem[j] == '-') {
+			if (word[j] == input && problem[j] == '-') { 
 				problem[j] = input;
 				find = true;
 			}
