@@ -19,7 +19,7 @@ int main() {
 	director.append_word(inFile);
 
 	srand((unsigned)time(0)); // for rand
-	char retry;
+	char retry; 
 	do {
 		director.game();
 		cout << "Next(y/n)? : ";
